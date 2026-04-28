@@ -1,0 +1,67 @@
+// This is the Prisma schema for EchoLearn.
+// Maps to the Supabase PostgreSQL database.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── User ───────────────────────────────────────
+// Stores learner profile and voice/tone preferences.
+model User {
+  id              String   @id @default(uuid())
+  name            String?
+  email           String?  @unique
+  password        String?
+  tone            String   @default("calm")        // calm | energetic | playful | serious
+  thoughtProfile  String   @default("mix")          // step_by_step | big_picture | mix
+  warmth          Int      @default(7)              // 1–10
+  voiceId         String?  @map("voice_id")         // ElevenLabs voice ID
+  commStyle       String?  @map("comm_style")       // communication style quiz result
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  topics   Topic[]
+  sessions Session[]
+
+  @@map("users")
+}
+
+// ─── Topic ──────────────────────────────────────
+// A piece of learning material uploaded by the user.
+model Topic {
+  id          String   @id @default(uuid())
+  userId      String   @map("user_id")
+  name        String
+  subject     String   @default("General")
+  sourceUrl   String?  @map("source_url")     // Supabase Storage path
+  fullText    String?  @map("full_text")       // Extracted PDF text
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sessions Session[]
+
+  @@map("topics")
+}
+
+// ─── Session ────────────────────────────────────
+// A tutoring session linking a user to a topic.
+// Stores the full conversation history as JSON.
+model Session {
+  id                   String   @id @default(uuid())
+  userId               String   @map("user_id")
+  topicId              String   @map("topic_id")
+  conversationHistory  Json     @default("[]") @map("conversation_history")
+  progressPercent      Int      @default(0) @map("progress_percent")
+  lastAccessedAt       DateTime @default(now()) @map("last_accessed_at")
+  createdAt            DateTime @default(now()) @map("created_at")
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  topic Topic @relation(fields: [topicId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
