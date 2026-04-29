@@ -136,24 +136,17 @@ export function useSessionWS() {
   // ─── Actions ──────────────────────────────────
 
   const initSession = useCallback(
-    (userId: string, opts: { sessionId?: string; topicId?: string }) => {
+    async (userId: string, opts: { sessionId?: string; topicId?: string }) => {
       setStatus('connecting');
-      connect();
-
-      // Wait for connection before sending init
-      const check = setInterval(() => {
-        // Check via the wsRef readyState indirectly by trying to send
-        try {
-          send({ type: 'init', userId, ...opts });
-          setStatus('initializing');
-          clearInterval(check);
-        } catch {
-          // Still connecting...
-        }
-      }, 100);
-
-      // Timeout after 5s
-      setTimeout(() => clearInterval(check), 5000);
+      try {
+        await connect();
+        send({ type: 'init', userId, ...opts });
+        setStatus('initializing');
+      } catch (err) {
+        console.error('Failed to connect WebSocket:', err);
+        setError('Failed to connect to server');
+        setStatus('error');
+      }
     },
     [connect, send]
   );
