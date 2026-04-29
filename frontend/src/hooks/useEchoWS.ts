@@ -36,33 +36,41 @@ export function useEchoWS() {
   const handlersRef = useRef<Set<WSMessageHandler>>(new Set());
   const [isConnected, setIsConnected] = useState(false);
 
-  const connect = useCallback(() => {
-    if (wsRef.current && wsRef.current.readyState <= WebSocket.OPEN) return;
+  const connect = useCallback((): Promise<void> => {
+    if (wsRef.current && wsRef.current.readyState <= WebSocket.OPEN) {
+      return Promise.resolve();
+    }
 
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const ws = new WebSocket(`${protocol}//${window.location.host}/ws`);
+    return new Promise<void>((resolve, reject) => {
+      const ws = new WebSocket('wss://p01--echolearn--5fdqsgfwm5w8.code.run/ws');
 
-    ws.onopen = () => setIsConnected(true);
+      ws.onopen = () => {
+        setIsConnected(true);
+        resolve();
+      };
 
-    ws.onmessage = (event) => {
-      try {
-        const msg = JSON.parse(event.data) as WSIncoming;
-        handlersRef.current.forEach((h) => h(msg));
-      } catch {
-        // binary or invalid JSON — ignore
-      }
-    };
+      ws.onmessage = (event) => {
+        try {
+          const msg = JSON.parse(event.data) as WSIncoming;
+          handlersRef.current.forEach((h) => h(msg));
+        } catch {
+          // binary or invalid JSON — ignore
+        }
+      };
 
-    ws.onclose = () => {
-      setIsConnected(false);
-      wsRef.current = null;
-    };
+      ws.onclose = () => {
+        setIsConnected(false);
+        wsRef.current = null;
+      };
 
-    ws.onerror = () => {
-      ws.close();
-    };
+      ws.onerror = (err) => {
+        console.error('WebSocket connection error:', err);
+        reject(new Error('WebSocket connection failed'));
+        ws.close();
+      };
 
-    wsRef.current = ws;
+      wsRef.current = ws;
+    });
   }, []);
 
   const disconnect = useCallback(() => {
