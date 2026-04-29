@@ -1,7 +1,7 @@
 // ─── EchoLearn API Client ───────────────────────
 // Typed fetch wrappers for the REST API.
 
-const API_BASE = '/api';
+const API_BASE = 'https://p01--echolearn--5fdqsgfwm5w8.code.run/api';
 
 // ─── Types ──────────────────────────────────────
 
