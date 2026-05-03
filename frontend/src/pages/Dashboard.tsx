@@ -170,7 +170,7 @@ export default function Dashboard() {
           transition={{ delay: 1 }}
           className="mt-12 text-center text-xs text-muted-foreground/40 font-body pb-6"
         >
-          EchoLearn · In conversation with Teach for India & Akanksha Foundation
+          EchoLearn · Learn in your own voice
         </motion.footer>
       </div>
     </PageTransition>
