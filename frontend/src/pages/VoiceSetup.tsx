@@ -323,7 +323,7 @@ export default function VoiceSetup() {
             transition={{ delay: 0.8 }}
             className="mt-4 text-center text-xs text-muted-foreground/50 font-body"
           >
-            Voice recording is optional — you can skip it
+            Voice recording is mandatory
           </motion.p>
         </div>
       </div>
