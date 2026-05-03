@@ -211,7 +211,7 @@ export default function SignIn() {
           transition={{ delay: 0.8 }}
           className="absolute bottom-6 text-center text-xs text-muted-foreground/40 font-body"
         >
-          Built with care · In partnership with Angel Express
+          Built with care to help you.
         </motion.footer>
       </div>
     </PageTransition>
