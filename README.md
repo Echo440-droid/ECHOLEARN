@@ -10,7 +10,7 @@ EchoLearn is built on the self-reference effect: people retain information signi
 
 - Voice cloning via a 10–15 second audio sample (ElevenLabs)
 - Real-time tutoring session over WebSocket with sub-second audio latency
-- Support for PDF, DOC, TXT, image, and YouTube link uploads
+- Support for PDF, DOC, TXT
 - Adaptive re-explanation based on student errors and hesitation points
 - Mastery Check — Claude generates quiz questions from uploaded material
 - Thought Profile — onboarding quiz that shapes how Claude explains concepts
