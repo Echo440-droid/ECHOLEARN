@@ -103,7 +103,7 @@ export default function Welcome() {
           transition={{ delay: 1 }}
           className="absolute bottom-6 text-center text-xs text-muted-foreground/40 font-body"
         >
-          Built with care · In partnership with Angel Express
+          Built with care to help you .
         </motion.footer>
       </div>
     </PageTransition>
