@@ -1,6 +1,6 @@
 # EchoLearn
 
-A personalized AI tutor that teaches students using their own cloned voice. Students upload any learning material — textbooks, notes, PDFs, or video links — and receive real-time explanations spoken back in their own voice, in their own accent and language.
+A personalized AI tutor that teaches students using their own cloned voice. Students upload any learning material in form of PDFs — and receive real-time explanations spoken back in their own voice, in their own accent and language.
 
 EchoLearn is built on the self-reference effect: people retain information significantly better when it is personally connected to them. By removing the cognitive distance of an unfamiliar voice, the platform improves engagement, comprehension, and retention. It adapts its explanations continuously until the student demonstrates mastery — not just completion.
 
