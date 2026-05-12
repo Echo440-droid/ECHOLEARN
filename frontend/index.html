@@ -3,20 +3,81 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- TODO: Set the document title to the name of your application -->
-    <title>ECHOLEARN</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
 
-    <!-- TODO: Update og:title to match your application name -->
-    <meta property="og:title" content="Lovable App" />
-    <meta property="og:description" content="Lovable Generated Project" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <!-- ─── Primary SEO ─────────────────────────────────────────────── -->
+    <title>EchoLearn — AI Tutor in Your Own Voice</title>
+    <meta
+      name="description"
+      content="EchoLearn is a personalized AI tutor that teaches you using your own cloned voice. Upload any PDF or document and receive real-time explanations spoken back in your own accent and language."
+    />
+    <meta
+      name="keywords"
+      content="AI tutor, voice cloning, personalized learning, study assistant, ElevenLabs, Claude AI, adaptive learning, self-reference effect, PDF learning, EchoLearn"
+    />
+    <meta name="author" content="EchoLearn" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://app.echolearn.app/" />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@Lovable" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <!-- ─── Open Graph (Facebook / LinkedIn / WhatsApp) ─────────────── -->
+    <meta property="og:type"         content="website" />
+    <meta property="og:url"          content="https://app.echolearn.app/" />
+    <meta property="og:site_name"    content="EchoLearn" />
+    <meta property="og:title"        content="EchoLearn — AI Tutor in Your Own Voice" />
+    <meta
+      property="og:description"
+      content="Learn faster and retain more. EchoLearn uses your cloned voice to explain any document back to you — adapting until you truly understand."
+    />
+    <meta property="og:image"        content="https://app.echolearn.app/echolearn.png" />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt"    content="EchoLearn — hear yourself teach yourself" />
+    <meta property="og:locale"       content="en_US" />
+
+    <!-- ─── Twitter / X Card ────────────────────────────────────────── -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:site"        content="@echolearn_app" />
+    <meta name="twitter:creator"     content="@echolearn_app" />
+    <meta name="twitter:title"       content="EchoLearn — AI Tutor in Your Own Voice" />
+    <meta
+      name="twitter:description"
+      content="Upload a PDF. Record 15 seconds of your voice. EchoLearn explains everything back to you in your own accent — adapting until you master it."
+    />
+    <meta name="twitter:image"       content="https://app.echolearn.app/echolearn.png" />
+    <meta name="twitter:image:alt"   content="EchoLearn — hear yourself teach yourself" />
+
+    <!-- ─── Favicon & Chrome Tab Icon ───────────────────────────────── -->
+    <link rel="icon" type="image/png" href="/echolearn.png" />
+    <link rel="apple-touch-icon"      href="/echolearn.png" />
+    <meta name="theme-color"          content="#0a0a0f" />
+
+    <!-- ─── Web App Manifest ─────────────────────────────────────────── -->
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- ─── Structured Data (Google Rich Results) ───────────────────── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "EchoLearn",
+      "url": "https://app.echolearn.app/",
+      "description": "A personalized AI tutor that teaches students using their own cloned voice. Upload any PDF and receive real-time adaptive explanations spoken back in your own voice.",
+      "applicationCategory": "EducationApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Voice cloning from a 10–15 second audio sample",
+        "Real-time tutoring via WebSocket with sub-second audio latency",
+        "PDF, DOC, and TXT document support",
+        "Adaptive re-explanation based on student errors",
+        "Mastery Check quiz generation",
+        "Thought Profile personalisation"
+      ]
+    }
+    </script>
   </head>
 
   <body>
