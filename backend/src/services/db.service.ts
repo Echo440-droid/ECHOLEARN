@@ -1,20 +1,26 @@
 // ─── Database Service ───────────────────────────
 // All Prisma queries for User, Topic, and Session.
 
-import { prisma } from '../lib/prisma';
+import { prisma, withRetry } from '../lib/prisma';
 import type { User, Topic, Session, Prisma } from '@prisma/client';
 import type { ConversationMessage } from './ai.service';
 
 // ─── User ───────────────────────────────────────
 
 export async function getUser(userId: string): Promise<User> {
-  const user = await prisma.user.findUnique({ where: { id: userId } });
+  const user = await withRetry(
+    () => prisma.user.findUnique({ where: { id: userId } }),
+    { label: 'getUser' }
+  );
   if (!user) throw new Error(`User not found: ${userId}`);
   return user;
 }
 
 export async function getUserByEmail(email: string): Promise<User | null> {
-  return prisma.user.findUnique({ where: { email } });
+  return withRetry(
+    () => prisma.user.findUnique({ where: { email } }),
+    { label: 'getUserByEmail' }
+  );
 }
 
 export async function updateUserPreferences(
