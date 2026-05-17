@@ -25,7 +25,12 @@ export async function uploadPDFToStorage(
   fileBuffer: Buffer,
   fileName: string
 ): Promise<string> {
-  const filePath = `${userId}/${uuidv4()}_${fileName}`;
+  // Sanitise the file name so the storage key contains no spaces,
+  // apostrophes, or other characters Supabase Storage rejects.
+  const safeName = fileName
+    .replace(/[^a-zA-Z0-9._-]/g, '_')   // replace problematic chars
+    .replace(/_{2,}/g, '_');              // collapse consecutive underscores
+  const filePath = `${userId}/${uuidv4()}_${safeName}`;
   const { error } = await supabase.storage
     .from('pdfs')
     .upload(filePath, fileBuffer, { contentType: 'application/pdf' });
