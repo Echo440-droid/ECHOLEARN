@@ -4,6 +4,7 @@
 // WS: real-time tutoring pipeline.
 
 import 'dotenv/config';
+import { warmUpDatabase, startKeepAlive } from './lib/prisma';
 import http from 'http';
 import express from 'express';
 import cors from 'cors';
@@ -38,7 +39,11 @@ wss.on('connection', handleConnection);
 
 // ─── Start ──────────────────────────────────────
 
-server.listen(PORT, () => {
+server.listen(PORT, async () => {
   console.log(`EchoLearn backend running on http://localhost:${PORT}`);
   console.log(`WebSocket available at ws://localhost:${PORT}`);
+
+  // Wake the Neon database and start the keep-alive heartbeat
+  await warmUpDatabase();
+  startKeepAlive();
 });
