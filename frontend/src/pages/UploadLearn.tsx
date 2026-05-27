@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { PageTransition } from "@/components/PageTransition";
-import { Upload, FileText, ArrowLeft, Sparkles, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { Upload, FileText, ArrowLeft, Sparkles, Loader2, CheckCircle2, AlertCircle, FileIcon } from "lucide-react";
 import { useUser } from "@/hooks/useUser";
 import { useSessionWS } from "@/hooks/useSessionWS";
 import { useToast } from "@/hooks/use-toast";
@@ -71,8 +71,13 @@ export default function UploadLearn() {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    if (file.type !== "application/pdf") {
-      toast({ title: "Unsupported file", description: "Please upload a PDF file.", variant: "destructive" });
+    const ALLOWED_TYPES = new Set([
+      "application/pdf",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    ]);
+
+    if (!ALLOWED_TYPES.has(file.type)) {
+      toast({ title: "Unsupported file", description: "Please upload a PDF or DOCX file.", variant: "destructive" });
       return;
     }
 
@@ -82,7 +87,7 @@ export default function UploadLearn() {
     }
 
     setSelectedFile(file);
-    setTopicNameInput(file.name.replace(/\.pdf$/i, "").replace(/[_-]/g, " "));
+    setTopicNameInput(file.name.replace(/\.(pdf|docx)$/i, "").replace(/[_-]/g, " "));
     setUploadPhase("configure");
   };
 
@@ -156,7 +161,7 @@ export default function UploadLearn() {
               <input
                 ref={fileInputRef}
                 type="file"
-                accept="application/pdf"
+                accept="application/pdf,.pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.docx"
                 onChange={handleFileSelect}
                 className="hidden"
               />
@@ -166,7 +171,7 @@ export default function UploadLearn() {
               >
                 <Upload className="w-10 h-10 text-muted-foreground mx-auto mb-4" />
                 <p className="font-heading font-semibold text-foreground mb-1">Drop files here or tap to browse</p>
-                <p className="text-sm text-muted-foreground font-body">PDF files up to 50MB</p>
+                <p className="text-sm text-muted-foreground font-body">PDF or DOCX files up to 50MB</p>
               </div>
             </motion.div>
           )}

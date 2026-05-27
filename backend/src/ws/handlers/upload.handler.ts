@@ -1,9 +1,14 @@
 // ─── Upload Handler ─────────────────────────────
-// Handles the 'upload_pdf' message: parses PDF, uploads to storage, creates topic & session.
+// Handles 'upload_pdf' / 'upload_document' messages: parses PDF or DOCX,
+// uploads to storage, creates topic & session.
 
 import WebSocket from 'ws';
 import * as db from '../../services/db.service';
-import { extractTextFromPDF, uploadPDFToStorage } from '../../services/pdf.service';
+import {
+  detectFileType,
+  extractTextFromDocument,
+  uploadDocumentToStorage,
+} from '../../services/pdf.service';
 import {
   buildSystemPrompt,
   buildTopicContext,
@@ -11,7 +16,10 @@ import {
 } from '../../services/ai.service';
 import type { ConnectionState } from '../connection.handler';
 
-export async function handleUploadPDF(
+// Allow-list of accepted MIME types (validated on the frontend too).
+const ALLOWED_EXTENSIONS = new Set(['pdf', 'docx']);
+
+export async function handleUploadDocument(
   msg: {
     fileName: string;
     fileBase64: string;
@@ -30,10 +38,19 @@ export async function handleUploadPDF(
     send({ type: 'upload_status', status: 'parsing' });
 
     const fileBuffer = Buffer.from(msg.fileBase64, 'base64');
-    const extractedText = await extractTextFromPDF(fileBuffer);
+
+    // Validate file content via magic bytes (never trust the file extension alone).
+    const fileType = detectFileType(fileBuffer);
+    if (!fileType || !ALLOWED_EXTENSIONS.has(fileType)) {
+      return sendError('Unsupported file type. Please upload a PDF or DOCX file.');
+    }
+
+    const extractedText = await extractTextFromDocument(fileBuffer, fileType);
 
     send({ type: 'upload_status', status: 'uploading' });
-    const storagePath = await uploadPDFToStorage(state.user.id, fileBuffer, msg.fileName);
+    const storagePath = await uploadDocumentToStorage(
+      state.user.id, fileBuffer, msg.fileName, fileType
+    );
 
     const topic = await db.createTopic({
       userId: state.user.id,
@@ -60,6 +77,10 @@ export async function handleUploadPDF(
     state.conversationHistory.push({ role: 'assistant', content: response });
     await db.saveSession(state.sessionId, state.conversationHistory);
   } catch (err: any) {
-    sendError(`PDF processing failed: ${err.message}`);
+    sendError(`Document processing failed: ${err.message}`);
   }
 }
+
+// Backward-compatible alias so existing 'upload_pdf' messages still work.
+export { handleUploadDocument as handleUploadPDF };
+

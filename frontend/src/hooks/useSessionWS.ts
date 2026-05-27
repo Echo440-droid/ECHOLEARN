@@ -154,7 +154,7 @@ export function useSessionWS() {
   const uploadPDF = useCallback(
     (file: { fileName: string; fileBase64: string; topicName?: string; subject?: string; question?: string }) => {
       setStatus('uploading');
-      send({ type: 'upload_pdf', ...file });
+      send({ type: 'upload_document', ...file });
     },
     [send]
   );

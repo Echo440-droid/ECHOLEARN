@@ -7,7 +7,7 @@ import type { ConversationMessage, UserProfile } from '../services/ai.service';
 import * as db from '../services/db.service';
 
 import { handleInit } from './handlers/init.handler';
-import { handleUploadPDF } from './handlers/upload.handler';
+import { handleUploadPDF, handleUploadDocument } from './handlers/upload.handler';
 import { handleAudioEnd } from './handlers/audio.handler';
 import { handleTextQuestion } from './handlers/text.handler';
 import { handleMasteryCheck } from './handlers/mastery.handler';
@@ -72,7 +72,8 @@ export function handleConnection(ws: WebSocket): void {
         break;
 
       case 'upload_pdf':
-        await handleUploadPDF(msg, ws, state, send, sendError);
+      case 'upload_document':
+        await handleUploadDocument(msg, ws, state, send, sendError);
         break;
 
       case 'audio_end':

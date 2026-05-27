@@ -75,7 +75,7 @@ export default function Dashboard() {
           <EchoCard variant="warm" delay={0.1} onClick={() => navigate("/upload")}>
             <Upload className="w-8 h-8 text-echo-warm-foreground mb-3" />
             <h3 className="font-heading font-semibold text-foreground text-lg mb-1">Upload something to learn</h3>
-            <p className="text-sm text-muted-foreground font-body">PDFs, notes, textbooks </p>
+            <p className="text-sm text-muted-foreground font-body">PDFs, DOCX, notes, textbooks </p>
           </EchoCard>
           <EchoCard variant="sky" delay={0.2} onClick={() => navigate("/upload")}>
             <MessageCircleQuestion className="w-8 h-8 text-echo-sky-foreground mb-3" />
