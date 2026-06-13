@@ -183,9 +183,17 @@ export default function VoiceSetup() {
             transition={{ delay: 0.2 }}
             className="echo-card text-center mb-6"
           >
-            <p className="text-sm text-muted-foreground font-body mb-4">
+            <p className="text-md text-muted-foreground font-body mb-4">
               Read aloud: <em>"The best way to learn something is to explain it to yourself."</em>
             </p>
+            <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="mt-4 text-center text-xs  font-body mb-4 underline font-bold"
+          >
+            Voice recording is mandatory
+          </motion.p>
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={toggleRecording}
@@ -317,14 +325,7 @@ export default function VoiceSetup() {
             )}
           </motion.button>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="mt-4 text-center text-xs text-muted-foreground/50 font-body"
-          >
-            Voice recording is mandatory
-          </motion.p>
+          
         </div>
       </div>
     </PageTransition>

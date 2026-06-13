@@ -16,6 +16,7 @@ export default {
       fontFamily: {
         heading: ['Outfit', 'sans-serif'],
         body: ['Nunito', 'sans-serif'],
+        display: ['DM Serif Display', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -70,6 +71,9 @@ export default {
           "lavender-foreground": "hsl(var(--echo-lavender-foreground))",
           sky: "hsl(var(--echo-sky))",
           "sky-foreground": "hsl(var(--echo-sky-foreground))",
+          coral: "#F97316",
+          peach: "#FFF5EE",
+          "green-accent": "#22C55E",
         },
       },
       borderRadius: {
@@ -100,6 +104,18 @@ export default {
           "0%, 100%": { transform: "scale(1)" },
           "50%": { transform: "scale(1.05)" },
         },
+        "float-bob": {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-12px)" },
+        },
+        "float-bob-slow": {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-8px)" },
+        },
+        "float-bob-alt": {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-15px)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -107,6 +123,9 @@ export default {
         "float": "float 6s ease-in-out infinite",
         "pulse-soft": "pulse-soft 3s ease-in-out infinite",
         "breathe": "breathe 4s ease-in-out infinite",
+        "float-bob": "float-bob 5s ease-in-out infinite",
+        "float-bob-slow": "float-bob-slow 7s ease-in-out infinite",
+        "float-bob-alt": "float-bob-alt 6s ease-in-out infinite",
       },
     },
   },

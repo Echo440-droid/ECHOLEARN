@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -57,6 +57,7 @@
 
     --font-heading: 'Outfit', sans-serif;
     --font-body: 'Nunito', sans-serif;
+    --font-display: 'DM Serif Display', serif;
   }
 
   .dark {
@@ -95,8 +96,9 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
     font-family: var(--font-body);
+    background: transparent;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);

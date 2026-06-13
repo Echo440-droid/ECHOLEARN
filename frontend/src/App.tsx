@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { UserProvider } from "@/hooks/useUser";
+import { GlobalBackground } from "@/components/GlobalBackground";
 import Welcome from "./pages/Welcome";
 import ThoughtQuiz from "./pages/ThoughtQuiz";
 import CommStyleQuiz from "./pages/CommStyleQuiz";
@@ -26,20 +27,23 @@ const App = () => (
       <Sonner />
       <UserProvider>
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Welcome />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/quiz" element={<ThoughtQuiz />} />
-            <Route path="/comm-style" element={<CommStyleQuiz />} />
-            <Route path="/voice-setup" element={<VoiceSetup />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/upload" element={<UploadLearn />} />
-            <Route path="/explanation" element={<Explanation />} />
-            <Route path="/mastery" element={<MasteryCheck />} />
-            <Route path="/progress" element={<Progress />} />
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <GlobalBackground />
+          <div className="relative" style={{ zIndex: 10 }}>
+            <Routes>
+              <Route path="/" element={<Welcome />} />
+              <Route path="/signin" element={<SignIn />} />
+              <Route path="/quiz" element={<ThoughtQuiz />} />
+              <Route path="/comm-style" element={<CommStyleQuiz />} />
+              <Route path="/voice-setup" element={<VoiceSetup />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/upload" element={<UploadLearn />} />
+              <Route path="/explanation" element={<Explanation />} />
+              <Route path="/mastery" element={<MasteryCheck />} />
+              <Route path="/progress" element={<Progress />} />
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
         </BrowserRouter>
       </UserProvider>
     </TooltipProvider>

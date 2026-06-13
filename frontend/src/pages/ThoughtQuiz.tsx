@@ -11,7 +11,7 @@ const questions = [
     question: "When solving a hard problem, do you prefer…",
     options: [
       { label: "Step-by-step logic", emoji: "🧩", value: "step_by_step" },
-      { label: "Big picture intuition", emoji: "🌊", value: "big_picture" },
+      { label: "Solve by instinct", emoji: "🌊", value: "big_picture" },
       { label: "A mix of both", emoji: "🔄", value: "mix" },
     ],
   },

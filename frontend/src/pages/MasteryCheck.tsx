@@ -85,7 +85,7 @@ export default function MasteryCheck() {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-8">
           <h2 className="text-2xl font-heading font-bold text-foreground mb-2">Mastery Check</h2>
           <p className="text-muted-foreground font-body text-sm">
-            Let's see how well this landed. No pressure — this is for you.
+            Lets see how well you remember the concepts. No pressure – this is just a practice. 
           </p>
 
           {!isLoading && masteryQuestions && masteryQuestions.length > 0 && (

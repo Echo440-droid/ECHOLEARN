@@ -7,6 +7,7 @@ import { ProgressRing } from "@/components/ProgressRing";
 import { Upload, MessageCircleQuestion, BookOpen, TrendingUp, Timer, Brain, LogOut, Loader2 } from "lucide-react";
 import { useUser } from "@/hooks/useUser";
 import { getUserSessions, type Session } from "@/lib/api";
+import mascotImg from "@/assets/echo-mascot.png";
 
 const colorCycle: Array<"sage" | "lavender" | "warm" | "sky"> = ["sage", "lavender", "warm", "sky"];
 
@@ -53,13 +54,24 @@ export default function Dashboard() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-10 flex items-start justify-between"
         >
-          <div>
-            <h1 className="text-3xl font-heading font-bold text-foreground mb-1">
-              Welcome back, {displayName} 👋
-            </h1>
-            <p className="text-muted-foreground font-body">
-              You're building understanding, not just finishing tasks.
-            </p>
+          <div className="flex items-center gap-4">
+            {/* Echo mascot greeting */}
+            <motion.img
+              src={mascotImg}
+              alt="Echo mascot"
+              className="w-16 h-16 object-contain drop-shadow-md hidden sm:block"
+              initial={{ scale: 0, rotate: -20 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ type: "spring", stiffness: 260, damping: 18, delay: 0.2 }}
+            />
+            <div>
+              <h1 className="text-3xl font-heading font-bold text-foreground mb-1">
+                Welcome back, {displayName} 👋
+              </h1>
+              <p className="text-muted-foreground font-body">
+                You're building understanding, not just finishing tasks.
+              </p>
+            </div>
           </div>
           <button
             onClick={() => { logout(); navigate("/"); }}
@@ -102,6 +114,13 @@ export default function Dashboard() {
             </div>
           ) : activeSessions.length === 0 ? (
             <EchoCard variant="sage" className="text-center !py-8">
+              <motion.img
+                src={mascotImg}
+                alt="Echo mascot"
+                className="w-24 h-24 object-contain mx-auto mb-3 drop-shadow-lg"
+                animate={{ y: [0, -6, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              />
               <p className="text-muted-foreground font-body text-sm">
                 No sessions yet — upload something to get started!
               </p>
@@ -168,7 +187,7 @@ export default function Dashboard() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          className="mt-12 text-center text-xs text-muted-foreground/40 font-body pb-6"
+          className="mt-12 text-center text-md text-muted-foreground/40 font-body pb-6"
         >
           EchoLearn · Learn in your own voice
         </motion.footer>
