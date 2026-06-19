@@ -45,5 +45,6 @@ server.listen(PORT, async () => {
 
   // Wake the Neon database and start the keep-alive heartbeat
   await warmUpDatabase();
+  //redeployment check
   // startKeepAlive();
 });
